@@ -1,0 +1,41 @@
+{
+  "id": "xbstack-n8n-array-mutating-null-isolated",
+  "name": "XBSTACK n8n array mutation isolated matrix",
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "nodes": [
+    {"parameters": {}, "id": "trigger", "name": "When clicking Test workflow", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [0,0]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-sort","name":"Input sort","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,-420]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ $json.data.sort() }}","type":"array"}]},"options":{}},"id":"set-sort","name":"Test sort direct","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,-420]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-splice","name":"Input splice","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,-280]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ $json.data.splice(0, 2) }}","type":"array"}]},"options":{}},"id":"set-splice","name":"Test splice direct","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,-280]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-fill","name":"Input fill","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,-140]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ $json.data.fill('X', 0, 2) }}","type":"array"}]},"options":{}},"id":"set-fill","name":"Test fill direct","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,-140]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-copy","name":"Input copyWithin","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,0]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ $json.data.copyWithin(0, 2, 4) }}","type":"array"}]},"options":{}},"id":"set-copy","name":"Test copyWithin direct","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,0]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-reverse","name":"Input reverse","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,140]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ $json.data.reverse() }}","type":"array"}]},"options":{}},"id":"set-reverse","name":"Test reverse direct","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,140]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-spread","name":"Input spread sort","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,280]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ [...$json.data].sort() }}","type":"array"}]},"options":{}},"id":"set-spread","name":"Test spread sort","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,280]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-slice","name":"Input slice sort","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,420]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ $json.data.slice().sort() }}","type":"array"}]},"options":{}},"id":"set-slice","name":"Test slice sort","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,420]}
+  ],
+  "connections": {
+    "When clicking Test workflow":{"main":[[
+      {"node":"Input sort","type":"main","index":0},
+      {"node":"Input splice","type":"main","index":0},
+      {"node":"Input fill","type":"main","index":0},
+      {"node":"Input copyWithin","type":"main","index":0},
+      {"node":"Input reverse","type":"main","index":0},
+      {"node":"Input spread sort","type":"main","index":0},
+      {"node":"Input slice sort","type":"main","index":0}
+    ]]},
+    "Input sort":{"main":[[{"node":"Test sort direct","type":"main","index":0}]]},
+    "Input splice":{"main":[[{"node":"Test splice direct","type":"main","index":0}]]},
+    "Input fill":{"main":[[{"node":"Test fill direct","type":"main","index":0}]]},
+    "Input copyWithin":{"main":[[{"node":"Test copyWithin direct","type":"main","index":0}]]},
+    "Input reverse":{"main":[[{"node":"Test reverse direct","type":"main","index":0}]]},
+    "Input spread sort":{"main":[[{"node":"Test spread sort","type":"main","index":0}]]},
+    "Input slice sort":{"main":[[{"node":"Test slice sort","type":"main","index":0}]]}
+  }
+}

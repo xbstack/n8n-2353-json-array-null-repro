@@ -1,0 +1,25 @@
+{
+  "verified_at": "2026-08-19T06:57:01Z",
+  "host": "macOS with Docker Desktop, arm64 host",
+  "execution_mode": "n8n CLI execute with default SQLite",
+  "versions": {
+    "2.34.5": {"image": "n8nio/n8n:2.34.5", "node": "v24.18.0"},
+    "2.35.3": {"image": "n8nio/n8n:2.35.3", "node": "v24.18.1"}
+  },
+  "isolated_matrix": {
+    "sort_direct": {"2.34.5": "array", "2.35.3": null},
+    "splice_direct": {"2.34.5": ["Mango", "Apple"], "2.35.3": null},
+    "fill_direct": {"2.34.5": "array starting with X,X", "2.35.3": null},
+    "copyWithin_direct": {"2.34.5": "mutated array", "2.35.3": null},
+    "reverse_direct": {"2.34.5": "reversed array", "2.35.3": "reversed array"},
+    "spread_sort": {"2.34.5": "sorted array", "2.35.3": "sorted array"},
+    "slice_sort": {"2.34.5": "sorted array", "2.35.3": "sorted array"}
+  },
+  "2.35.3_copy_workarounds": {
+    "[...$json.data].sort()": "pass",
+    "[...$json.data].splice(0, 2)": "pass",
+    "[...$json.data].fill('X', 0, 2)": "pass",
+    "[...$json.data].copyWithin(0, 2, 4)": "pass"
+  },
+  "conclusion": "Regression confirmed between n8n 2.34.5 and 2.35.3 for direct sort/splice/fill/copyWithin calls on $json arrays in Edit Fields. Copy-first workarounds pass on 2.35.3."
+}

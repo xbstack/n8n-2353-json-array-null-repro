@@ -1,0 +1,29 @@
+{
+  "id": "xbstack-n8n-array-mutating-null-workarounds",
+  "name": "XBSTACK n8n 2.35.3 array copy workarounds",
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "nodes": [
+    {"parameters": {}, "id":"trigger", "name":"When clicking Test workflow", "type":"n8n-nodes-base.manualTrigger", "typeVersion":1, "position":[0,0]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-sort","name":"Input copied sort","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,-210]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ [...$json.data].sort() }}","type":"array"}]},"options":{}},"id":"set-sort","name":"Copied sort","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,-210]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-splice","name":"Input copied splice","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,-70]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ [...$json.data].splice(0, 2) }}","type":"array"}]},"options":{}},"id":"set-splice","name":"Copied splice","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,-70]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-fill","name":"Input copied fill","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,70]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ [...$json.data].fill('X', 0, 2) }}","type":"array"}]},"options":{}},"id":"set-fill","name":"Copied fill","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,70]},
+    {"parameters":{"jsCode":"return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"},"id":"in-copy","name":"Input copied copyWithin","type":"n8n-nodes-base.code","typeVersion":2,"position":[220,210]},
+    {"parameters":{"assignments":{"assignments":[{"id":"v","name":"result","value":"={{ [...$json.data].copyWithin(0, 2, 4) }}","type":"array"}]},"options":{}},"id":"set-copy","name":"Copied copyWithin","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[460,210]}
+  ],
+  "connections": {
+    "When clicking Test workflow":{"main":[[
+      {"node":"Input copied sort","type":"main","index":0},
+      {"node":"Input copied splice","type":"main","index":0},
+      {"node":"Input copied fill","type":"main","index":0},
+      {"node":"Input copied copyWithin","type":"main","index":0}
+    ]]},
+    "Input copied sort":{"main":[[{"node":"Copied sort","type":"main","index":0}]]},
+    "Input copied splice":{"main":[[{"node":"Copied splice","type":"main","index":0}]]},
+    "Input copied fill":{"main":[[{"node":"Copied fill","type":"main","index":0}]]},
+    "Input copied copyWithin":{"main":[[{"node":"Copied copyWithin","type":"main","index":0}]]}
+  }
+}

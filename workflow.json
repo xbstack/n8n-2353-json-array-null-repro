@@ -1,0 +1,54 @@
+{
+  "id": "xbstack-n8n-array-mutating-null-repro",
+  "name": "XBSTACK n8n 2.35.3 array mutation null repro",
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger",
+      "name": "When clicking Test workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { data: ['Mango','Apple','Kiwi','Orange','Blueberry','Banana','Peach','Grape','Pineapple','Strawberry'] } }];"
+      },
+      "id": "input",
+      "name": "Create input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {"id": "sort", "name": "sort_direct", "value": "={{ $json.data.sort() }}", "type": "array"},
+            {"id": "splice", "name": "splice_direct", "value": "={{ $json.data.splice(0, 2) }}", "type": "array"},
+            {"id": "fill", "name": "fill_direct", "value": "={{ $json.data.fill('X', 0, 2) }}", "type": "array"},
+            {"id": "copyWithin", "name": "copyWithin_direct", "value": "={{ $json.data.copyWithin(0, 2, 4) }}", "type": "array"},
+            {"id": "reverse", "name": "reverse_direct", "value": "={{ $json.data.reverse() }}", "type": "array"},
+            {"id": "spreadSort", "name": "spread_sort", "value": "={{ [...$json.data].sort() }}", "type": "array"},
+            {"id": "sliceSort", "name": "slice_sort", "value": "={{ $json.data.slice().sort() }}", "type": "array"},
+            {"id": "filter", "name": "filter_non_mutating", "value": "={{ $json.data.filter(x => x.startsWith('B')) }}", "type": "array"},
+            {"id": "map", "name": "map_non_mutating", "value": "={{ $json.data.map(x => x.toUpperCase()) }}", "type": "array"},
+            {"id": "includes", "name": "includes_non_mutating", "value": "={{ $json.data.includes('Apple') }}", "type": "boolean"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "edit-fields",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [460, 0]
+    }
+  ],
+  "connections": {
+    "When clicking Test workflow": {"main": [[{"node": "Create input", "type": "main", "index": 0}]]},
+    "Create input": {"main": [[{"node": "Edit Fields", "type": "main", "index": 0}]]}
+  }
+}
